@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:ciam_lab/Utils/colorsandstyles.dart';
+import 'package:ciam_lab/controller/ProfileSettingController/personal_setting_controller.dart';
 import 'package:ciam_lab/controller/navigation_controller.dart';
+import 'package:ciam_lab/model/lab_profile.dart';
 import 'package:ciam_lab/widgets/commonAppBarLeading.dart';
 import 'package:ciam_lab/widgets/common_app_bar_title.dart';
 import 'package:ciam_lab/widgets/common_button.dart';
@@ -20,12 +22,22 @@ class Personal extends StatefulWidget {
 }
 
 class _PersonalState extends State<Personal> {
-  TextEditingController controller = TextEditingController();
-
+  PersonalSettingController personalController = PersonalSettingController();
+  late GetProfile profileDetails;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    personalController.getdata(context).then((value) {
+      setState(() {
+        profileDetails = value;
+        personalController.firstname.text = value.data.firstName;
+        personalController.lastname.text = value.data.lastName;
+        personalController.email.text = value.data.email;
+        personalController.contactno.text = value.data.mobileNumber;
+        personalController.address.text = value.data.address;
+      });
+    });
   }
 
   @override
@@ -53,14 +65,21 @@ class _PersonalState extends State<Personal> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            TitleEnterField('Firstname', 'Firstname', controller),
-            TitleEnterField('Lastname', 'Lastname', controller),
-            TitleEnterField('Email ID', 'email ID', controller),
-            TitleEnterField('Contact Number', 'Contact Number', controller),
+            TitleEnterField(
+                'Firstname', 'Firstname', personalController.firstname),
+            TitleEnterField(
+                'Lastname', 'Lastname', personalController.lastname),
+            TitleEnterField('Email ID', 'email ID', personalController.email),
+            TitleEnterField(
+              'Contact Number',
+              'Contact Number',
+              personalController.contactno,
+              textInputType: TextInputType.number,
+            ),
             TitleEnterField(
               'Address',
               'Address',
-              controller,
+              personalController.address,
               maxLines: 10,
             ),
             const SizedBox(
@@ -72,7 +91,9 @@ class _PersonalState extends State<Personal> {
                 s: 'Submit',
                 bgcolor: appblueColor,
                 textColor: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  personalController.submit(context);
+                },
                 borderRadius: 8,
                 textSize: 20,
               ),

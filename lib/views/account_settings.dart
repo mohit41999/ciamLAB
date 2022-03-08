@@ -1,3 +1,4 @@
+import 'package:ciam_lab/controller/account_setting.dart';
 import 'package:ciam_lab/controller/navigation_controller.dart';
 import 'package:ciam_lab/views/biometric_authenticate.dart';
 import 'package:ciam_lab/widgets/common_button.dart';
@@ -19,8 +20,8 @@ class AccountSetting extends StatefulWidget {
 }
 
 class _AccountSettingState extends State<AccountSetting> {
-  TextEditingController newpass = TextEditingController();
-  TextEditingController oldpass = TextEditingController();
+  AccountSettingController accountController = AccountSettingController();
+
   late bool value;
   Future initialize() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -60,10 +61,14 @@ class _AccountSettingState extends State<AccountSetting> {
               SizedBox(
                 height: 15,
               ),
-              TitleEnterField('Enter Old Password', 'Change Password', newpass),
-              TitleEnterField('Enter New Password', 'New Password', oldpass),
+              TitleEnterField('Enter Old Password', 'Change Password',
+                  accountController.old_password),
+              TitleEnterField('Enter New Password', 'New Password',
+                  accountController.new_password),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    accountController.deactivateaccount(context);
+                  },
                   child: Text(
                     'Deactivate Account',
                     style: GoogleFonts.montserrat(
@@ -110,7 +115,7 @@ class _AccountSettingState extends State<AccountSetting> {
                 bgcolor: appblueColor,
                 textColor: Colors.white,
                 onPressed: () {
-                  // _con.changesPassword(context);
+                  accountController.changePassword(context);
                 },
                 borderRadius: 8,
               ),

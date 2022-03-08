@@ -90,7 +90,6 @@ class _commonDrawerState extends State<commonDrawer> {
   Future initialize() async {
     PersonalSettingController().getdata(context).then((value) {
       setState(() {
-        profilepic = value.data.profile;
         username = value.data.firstName + ' ' + value.data.lastName;
         loading = false;
       });
@@ -121,9 +120,10 @@ class _commonDrawerState extends State<commonDrawer> {
                     : Container(
                         height: 250,
                         decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(profilepic),
-                                fit: BoxFit.cover)),
+                            // image: DecorationImage(
+                            //     image: NetworkImage(profilepic),
+                            //     fit: BoxFit.cover)
+                            ),
                         child: Align(
                           alignment: Alignment.bottomCenter,
                           child: Container(

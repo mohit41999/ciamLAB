@@ -154,26 +154,26 @@ class _SignInScreenState extends State<SignInScreen> {
               SizedBox(
                 height: 20,
               ),
-              Center(
-                child: RichText(
-                  text: TextSpan(
-                      text: 'Don\'t have an DCP account ?',
-                      style: TextStyle(color: Color(0xff515151), fontSize: 18),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: ' Sign up',
-                            style: TextStyle(color: apptealColor, fontSize: 18),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignUpPage()));
-                                // navigate to desired screen
-                              })
-                      ]),
-                ),
-              ),
+              // Center(
+              //   child: RichText(
+              //     text: TextSpan(
+              //         text: 'Don\'t have an DCP account ?',
+              //         style: TextStyle(color: Color(0xff515151), fontSize: 18),
+              //         children: <TextSpan>[
+              //           TextSpan(
+              //               text: ' Sign up',
+              //               style: TextStyle(color: apptealColor, fontSize: 18),
+              //               recognizer: TapGestureRecognizer()
+              //                 ..onTap = () {
+              //                   Navigator.push(
+              //                       context,
+              //                       MaterialPageRoute(
+              //                           builder: (context) => SignUpPage()));
+              //                   // navigate to desired screen
+              //                 })
+              //         ]),
+              //   ),
+              // ),
             ],
           ),
         ),

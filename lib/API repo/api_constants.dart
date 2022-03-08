@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-const String BASE_URL = 'http://ciam.notionprojects.tech/api/patient/';
+const String BASE_URL = 'http://ciam.notionprojects.tech/api/laboratory/';
 const String Token = '123456789';
 
 void success(
