@@ -160,8 +160,78 @@ class _UpcomingState extends State<Upcoming> {
                         top: 10.0,
                         bottom: (index + 1 == 10) ? 70 : 10.0),
                     child: Container(
-                      height: MediaQuery.of(context).size.height / 4.5,
-                      color: Colors.white,
+                      height: MediaQuery.of(context).size.height / 4,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: titleColumn(
+                                            title: 'Booking id',
+                                            value: 'value'),
+                                      ),
+                                      Expanded(
+                                        child: titleColumn(
+                                            title: 'Date of Booking',
+                                            value: 'value'),
+                                      )
+                                    ],
+                                  ),
+                                  titleColumn(
+                                      title: 'Patient Name', value: 'value'),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: titleColumn(
+                                            title: 'Lab Test Name',
+                                            value: 'value'),
+                                      ),
+                                      Expanded(
+                                        child: titleColumn(
+                                            title: 'Lab Test Result',
+                                            value: 'value'),
+                                      )
+                                    ],
+                                  ),
+                                  titleColumn(title: 'Amount', value: 'value'),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: appblueColor,
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10.0),
+                                      bottomRight: Radius.circular(10.0))),
+                              child: Center(
+                                  child: Text(
+                                'View Details',
+                                style: GoogleFonts.montserrat(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                            ),
+                          )
+                        ],
+                      ),
                     ));
               }),
           Padding(
@@ -247,8 +317,78 @@ class _CompletedState extends State<Completed> {
                         top: 10.0,
                         bottom: (index + 1 == 10) ? 70 : 10.0),
                     child: Container(
-                      height: MediaQuery.of(context).size.height / 4.5,
-                      color: Colors.red,
+                      height: MediaQuery.of(context).size.height / 4,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: titleColumn(
+                                            title: 'Booking id',
+                                            value: 'value'),
+                                      ),
+                                      Expanded(
+                                        child: titleColumn(
+                                            title: 'Date of Booking',
+                                            value: 'value'),
+                                      )
+                                    ],
+                                  ),
+                                  titleColumn(
+                                      title: 'Patient Name', value: 'value'),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: titleColumn(
+                                            title: 'Lab Test Name',
+                                            value: 'value'),
+                                      ),
+                                      Expanded(
+                                        child: titleColumn(
+                                            title: 'Lab Test Result',
+                                            value: 'value'),
+                                      )
+                                    ],
+                                  ),
+                                  titleColumn(title: 'Amount', value: 'value'),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: appblueColor,
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10.0),
+                                      bottomRight: Radius.circular(10.0))),
+                              child: Center(
+                                  child: Text(
+                                'View Details',
+                                style: GoogleFonts.montserrat(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                            ),
+                          )
+                        ],
+                      ),
                     ));
               }),
           Padding(
