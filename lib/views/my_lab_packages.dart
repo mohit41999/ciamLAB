@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MyLabTests extends StatefulWidget {
-  const MyLabTests({Key? key}) : super(key: key);
+class MyLabPackages extends StatefulWidget {
+  const MyLabPackages({Key? key}) : super(key: key);
 
   @override
-  _MyLabTestsState createState() => _MyLabTestsState();
+  _MyLabPackagesState createState() => _MyLabPackagesState();
 }
 
-class _MyLabTestsState extends State<MyLabTests>
+class _MyLabPackagesState extends State<MyLabPackages>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -32,7 +32,7 @@ class _MyLabTestsState extends State<MyLabTests>
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: commonAppBarTitleText(appbarText: 'My Lab Test Bookings'),
+        title: commonAppBarTitleText(appbarText: 'Account Setting'),
         backgroundColor: appAppBarColor,
         elevation: 0,
         leading: Builder(

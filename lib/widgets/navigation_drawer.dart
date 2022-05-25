@@ -2,6 +2,7 @@ import 'package:ciam_lab/firebase/AuthenticatioHelper.dart';
 import 'package:ciam_lab/views/MyReviewRating.dart';
 import 'package:ciam_lab/views/MyWalletTabs/my_wallet_pg.dart';
 import 'package:ciam_lab/views/account_settings.dart';
+import 'package:ciam_lab/views/my_lab_packages.dart';
 import 'package:ciam_lab/views/my_lab_tests.dart';
 import 'package:ciam_lab/views/personal_tab.dart';
 import 'package:ciam_lab/views/signin_screen.dart';
@@ -22,8 +23,12 @@ List<Map<dynamic, dynamic>> drawerList = [
     'Screen': Personal(),
   },
   {
-    'label': 'My Lab Tests Request',
+    'label': 'My Lab Tests Bookings',
     'Screen': MyLabTests(),
+  },
+  {
+    'label': 'My Lab Package Bookings',
+    'Screen': MyLabPackages(),
   },
   {
     'label': 'My Reviews',

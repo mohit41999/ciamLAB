@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     MaterialPageRoute(builder: (context) => HomeScreen())));
   }
 
-  FireBaseSetup fireBaseSetup = FireBaseSetup();
+  // FireBaseSetup fireBaseSetup = FireBaseSetup();
   loadVideoPlayer() {
     controller = VideoPlayerController.asset('assets/video/splash.mp4');
 
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     loadVideoPlayer();
     navigate();
-    fireBaseSetup.storefcmToken();
+    // fireBaseSetup.storefcmToken();
 
     super.initState();
   }

@@ -1,4 +1,5 @@
 import 'package:ciam_lab/API%20repo/api_constants.dart';
+import 'package:ciam_lab/API%20repo/end_points.dart';
 import 'package:ciam_lab/Utils/progress_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,7 +12,7 @@ class AccountSettingController {
     var loader = ProgressView(context);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     loader.show();
-    await PostData(PARAM_URL: 'account_setting.php', params: {
+    await PostData(PARAM_URL: AppConstants.account_setting, params: {
       'token': Token,
       'user_id': prefs.getString('user_id'),
       'old_password': old_password.text,
@@ -31,7 +32,7 @@ class AccountSettingController {
     var loader = ProgressView(context);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     loader.show();
-    await PostData(PARAM_URL: 'deactive_account.php', params: {
+    await PostData(PARAM_URL: AppConstants.deactive_account, params: {
       'token': Token,
       'user_id': prefs.getString('user_id'),
     }).then((value) {

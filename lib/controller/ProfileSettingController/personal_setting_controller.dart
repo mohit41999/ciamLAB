@@ -1,3 +1,4 @@
+import 'package:ciam_lab/API%20repo/end_points.dart';
 import 'package:ciam_lab/model/lab_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -47,8 +48,8 @@ class PersonalSettingController {
 
     // var response = (mediaFile == null)
     //     ?
-    var response =
-        await PostData(PARAM_URL: 'profile_setting.php', params: bodyParam);
+    var response = await PostData(
+        PARAM_URL: AppConstants.profile_setting, params: bodyParam);
     // : await PostDataWithImage(
     //     PARAM_URL: 'update_patient_details.php',
     //     params: bodyParam,
@@ -69,7 +70,8 @@ class PersonalSettingController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? user_id = prefs.getString('user_id');
     print(user_id);
-    var response = await PostData(PARAM_URL: 'get_user_profile.php', params: {
+    var response =
+        await PostData(PARAM_URL: AppConstants.get_user_profile, params: {
       'token': Token,
       'user_id': user_id.toString(),
     });
