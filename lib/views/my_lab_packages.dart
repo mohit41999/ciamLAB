@@ -1,6 +1,8 @@
 import 'package:ciam_lab/API%20repo/api_constants.dart';
+import 'package:ciam_lab/API%20repo/end_points.dart';
 import 'package:ciam_lab/Utils/colorsandstyles.dart';
 import 'package:ciam_lab/controller/navigation_controller.dart';
+import 'package:ciam_lab/model/lab_packages.dart';
 import 'package:ciam_lab/widgets/commonAppBarLeading.dart';
 import 'package:ciam_lab/widgets/common_app_bar_title.dart';
 import 'package:ciam_lab/widgets/common_button.dart';
@@ -103,31 +105,27 @@ class Upcoming extends StatefulWidget {
 }
 
 class _UpcomingState extends State<Upcoming> {
-  // Future<UpcomingAppointments> getupcoming() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   late Map<String, dynamic> response;
-  //   await PostData(PARAM_URL: 'get_upcoming_booking.php', params: {
-  //     'token': Token,
-  //     'doctor_id': preferences.getString('user_id')
-  //   }).then((value) {
-  //     response = value;
-  //   });
-  //   return UpcomingAppointments.fromJson(response);
-  // }
-  //
-  // late UpcomingAppointments upcomingAppointments;
-  // bool upcomingloading = true;
+  late LabPackageModel labPackages;
+  bool loading = true;
+
+  Future<LabPackageModel> getLabPackages() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var response = await PostData(
+        PARAM_URL: AppConstants.get_upcoming_lab_package,
+        params: {'token': Token, 'user_id': preferences.getString('user_id')});
+    return LabPackageModel.fromJson(response);
+  }
 
   @override
   void initState() {
     // TODO: implement initState
+
+    getLabPackages().then((value) {
+      labPackages = value;
+      loading = false;
+      setState(() {});
+    });
     super.initState();
-    // getupcoming().then((value) {
-    //   setState(() {
-    //     upcomingAppointments = value;
-    //     upcomingloading = false;
-    //   });
-    // });
   }
 
   @override
@@ -145,109 +143,128 @@ class _UpcomingState extends State<Upcoming> {
           //
           //     ? Center(child: Text('No upcoming appointments'))
           //     :
-          Stack(
-        children: [
-          ListView.builder(
+          (loading)
+              ? Center(child: CircularProgressIndicator())
+              : Stack(
+                  children: [
+                    ListView.builder(
 
-              // physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Padding(
-                    padding: EdgeInsets.only(
-                        left: 10.0,
-                        right: 10.0,
-                        top: 10.0,
-                        bottom: (index + 1 == 10) ? 70 : 10.0),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height / 4,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: titleColumn(
-                                            title: 'Booking id',
-                                            value: 'value'),
+                        // physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: labPackages.data.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                              padding: EdgeInsets.only(
+                                  left: 10.0,
+                                  right: 10.0,
+                                  top: 10.0,
+                                  bottom: (index + 1 == labPackages.data.length)
+                                      ? 70
+                                      : 10.0),
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 4,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      flex: 5,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: titleColumn(
+                                                      title: 'Booking id',
+                                                      value: labPackages
+                                                          .data[index]
+                                                          .bookingId),
+                                                ),
+                                                Expanded(
+                                                  child: titleColumn(
+                                                      title: 'Date of Booking',
+                                                      value: labPackages
+                                                          .data[index]
+                                                          .bookingDate),
+                                                )
+                                              ],
+                                            ),
+                                            titleColumn(
+                                                title: 'Patient Name',
+                                                value: labPackages
+                                                    .data[index].patientName),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: titleColumn(
+                                                      title: 'Package Name',
+                                                      value: labPackages
+                                                          .data[index]
+                                                          .packageName),
+                                                ),
+                                                // Expanded(
+                                                //   child: titleColumn(
+                                                //       title: 'Package Result',
+                                                //       value: labPackages.data[index]),
+                                                // )
+                                              ],
+                                            ),
+                                            titleColumn(
+                                                title: 'Amount',
+                                                value: labPackages
+                                                    .data[index].ammount),
+                                          ],
+                                        ),
                                       ),
-                                      Expanded(
-                                        child: titleColumn(
-                                            title: 'Date of Booking',
-                                            value: 'value'),
-                                      )
-                                    ],
-                                  ),
-                                  titleColumn(
-                                      title: 'Patient Name', value: 'value'),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: titleColumn(
-                                            title: 'Lab Test Name',
-                                            value: 'value'),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: appblueColor,
+                                            borderRadius: BorderRadius.only(
+                                                bottomLeft:
+                                                    Radius.circular(10.0),
+                                                bottomRight:
+                                                    Radius.circular(10.0))),
+                                        child: Center(
+                                            child: Text(
+                                          'View Details',
+                                          style: GoogleFonts.montserrat(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        )),
                                       ),
-                                      Expanded(
-                                        child: titleColumn(
-                                            title: 'Lab Test Result',
-                                            value: 'value'),
-                                      )
-                                    ],
-                                  ),
-                                  titleColumn(title: 'Amount', value: 'value'),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: appblueColor,
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10.0),
-                                      bottomRight: Radius.circular(10.0))),
-                              child: Center(
-                                  child: Text(
-                                'View Details',
-                                style: GoogleFonts.montserrat(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                            ),
-                          )
-                        ],
+                                    )
+                                  ],
+                                ),
+                              ));
+                        }),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: commonBtn(
+                            borderRadius: 10,
+                            s: 'ViewAll',
+                            bgcolor: appblueColor,
+                            textColor: Colors.white,
+                            onPressed: () {}),
                       ),
-                    ));
-              }),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: commonBtn(
-                  borderRadius: 10,
-                  s: 'ViewAll',
-                  bgcolor: appblueColor,
-                  textColor: Colors.white,
-                  onPressed: () {}),
-            ),
-          )
-        ],
-      ),
+                    )
+                  ],
+                ),
     );
   }
 }
